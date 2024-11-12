@@ -13,7 +13,7 @@ public class Calculator {
             switch (userOption) {
                 case 1: Addition(arrayNumbers);
                     break;
-                case 2: Substraction(arrayNumbers);
+                case 2: Subtraction(arrayNumbers);
                     break;
                 case 3: Multiplication(arrayNumbers);
                     break;
@@ -49,7 +49,7 @@ public class Calculator {
     public static void Addition(double[] arrayNumbers){
         System.out.println("La suma del número " + arrayNumbers[0] + " y el número " + arrayNumbers[0] + " es " + (arrayNumbers[0] + arrayNumbers[1]));
     }
-    public static void Substraction(double[] arrayNumbers){
+    public static void Subtraction(double[] arrayNumbers){
         System.out.println("La resta entre el número " + arrayNumbers[0] + " y el número " + arrayNumbers[0] + " es " + (arrayNumbers[0] - arrayNumbers[1]));
     }
     public static void Multiplication(double[] arrayNumbers){
