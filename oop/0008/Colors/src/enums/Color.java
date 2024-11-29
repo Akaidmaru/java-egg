@@ -2,8 +2,8 @@ package enums;
 
 public enum Color {
     RED("ROJO","#FF0000"),
-    YELLOW("YELLOW","#FFFF00"),
-    BLUE("BLUE", "#0000FF");
+    YELLOW("AMARILLO","#FFFF00"),
+    BLUE("AZUL", "#0000FF");
 
     private String name;
     private String hexValue;

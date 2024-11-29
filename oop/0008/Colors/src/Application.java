@@ -14,11 +14,12 @@ public class Application {
 
 
         for(String hexValue : colorsArray){
-            String name =       0;
-            if(hexValue == null){
-                System.out.println("No es un color primario");
+            Color color = ColorConverter.hexConverter(hexValue);
+            if(color != null){
+                System.out.println(color.getName() + " es un color primario.");
+            } else {
+                System.out.println(hexValue + " no es un color primario");
             }
         }
     }
-
 }
