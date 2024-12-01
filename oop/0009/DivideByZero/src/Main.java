@@ -3,37 +3,34 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         try{
-            double numerator =  getNumerator();
-            double denominator =  getDenominator();
+            Scanner input = new Scanner(System.in);
+            double numerator =  getNumerator(input);
+            double denominator =  getDenominator(input);
 
             double result = division(numerator, denominator);
 
-            so
-
+            System.out.println("El resultado es: " + result);
         }catch (Exception e) {
-            System.out.println("");
+            System.out.println("Error fatal: " + e.getMessage());
         }
     }
 
-    public static double getNumerator() throws Exception{
-        Scanner input = new Scanner(System.in);
+    public static double getNumerator(Scanner input) throws Exception{;
         System.out.println("Ingresa un numerador: ");
-        int numerator = Integer.parseInt(input.nextLine());
-
+        double numerator = Double.parseDouble(input.nextLine());
         if (numerator == 0){
-            throw new Exception("No puedes dividir por 0");
+            throw new Exception("El numerador no puede ser 0");
         }
         return numerator;
     }
 
-    public static double getDenominator() throws Exception{
+    public static double getDenominator(Scanner input) throws Exception{
 
-        Scanner input = new Scanner(System.in);
         System.out.println("Ingresa un denominador: ");
-        int denominator = Integer.parseInt(input.nextLine());
+        double denominator = Double.parseDouble(input.nextLine());
 
         if (denominator == 0){
-            throw new Exception("No puedes dividir por 0");
+            throw new Exception("El denominador no puede ser 0");
         }
         return denominator;
     }
