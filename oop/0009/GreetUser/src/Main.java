@@ -14,7 +14,7 @@ public class Main {
     }
     }
 
-    public static String askNameLastname()  throws Exception {
+    public static String askNameLastname()   {
         Scanner input = new Scanner(System.in);
         String name;
         String lastname;
@@ -22,7 +22,7 @@ public class Main {
             System.out.println("Type your name: ");
             name = input.nextLine();
             if (name.length() <= 2) {
-                throw new Exception("El nombre debe tener más de dos caracteres.");
+                throw new IllegalArgumentException("El nombre debe tener más de dos caracteres.");
             }
             System.out.println("Type your Lastname: ");
             lastname = input.nextLine();
