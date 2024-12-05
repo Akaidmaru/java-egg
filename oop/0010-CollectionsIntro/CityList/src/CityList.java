@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CityList {
-    static ArrayList<String> cityList = new ArrayList<String>();
+    static ArrayList<String> cityList = new ArrayList<>();
     static Scanner input = new Scanner(System.in);
     static boolean flag = true;
 
