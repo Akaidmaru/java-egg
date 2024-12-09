@@ -24,7 +24,7 @@ public class Main {
 
             switch (userOption) {
                 case 1 -> {
-                    System.out.println("Ingresa el título del invitado a agregar: ");
+                    System.out.println("Ingresa el título del libro a agregar: ");
                     String title = input.nextLine();
                     System.out.println("Ingresa el autor del libro: ");
                     String author =input.nextLine();

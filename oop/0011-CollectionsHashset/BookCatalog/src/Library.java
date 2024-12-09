@@ -22,11 +22,14 @@ public class Library {
     }
 
     public boolean deleteBook(int isbn){
+        boolean removed = booksCatalog.removeIf(book -> book.getIsbn() == isbn);
         if (booksCatalog.isEmpty()){
             System.out.println("El catálogo está vacío. No hay libros para eliminar.");
             return false;
+        } else if (!removed) {
+            System.out.println("No se encontré el libro con ISBN: " + isbn);
         }
-        return booksCatalog.removeIf(book -> book.getIsbn() == isbn);
+        return removed;
     }
 
     public void showBooksCatalog(){
@@ -36,6 +39,7 @@ public class Library {
         }
         int counter = 1;
         System.out.println("*********Books' Catalog*********");
+        System.out.println("Total de libros en el catálogo: " + booksCatalog.size());
         for (Book book : booksCatalog) {
             System.out.println(counter++ + ") "+ book.toString());
         }
