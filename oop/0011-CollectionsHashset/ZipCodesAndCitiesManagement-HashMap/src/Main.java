@@ -37,7 +37,7 @@ public class Main {
                     """);
             try {
                 userOption = Integer.parseInt(input.nextLine());
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException error) {
                 System.out.println("Ingresa un número válido.");
                 continue;
             }
@@ -45,41 +45,34 @@ public class Main {
             switch (userOption) {
                 case 1 -> zipcodeCitiesHashMap.showItems();
                 case 2 -> {
-                    System.out.println("Ingresa el código postal de la ciudad: ");
-                    int zipcode = Integer.parseInt(input.nextLine());
-                    System.out.println("Ingresa el Nombre de la ciudad: ");
-                    String cityName = input.nextLine();
-                    zipcodeCitiesHashMap.addCity(zipcode, cityName);
+                    int zipcode = zipcodeCitiesHashMap.readValidZipCode(input);
+                    if (zipcode != -1) {
+                        String newCityName = zipcodeCitiesHashMap.readValidCityName(input);
+                        if (newCityName != null) zipcodeCitiesHashMap.addCity(zipcode, newCityName);
+                    }
                 }
                 case 3 -> {
-                    System.out.println("Ingresa el código postal de la ciudad: ");
-                    int zipcode = Integer.parseInt(input.nextLine());
-                    zipcodeCitiesHashMap.getCityName(zipcode);
+                    int zipcode = zipcodeCitiesHashMap.readValidZipCode(input);
+                    if (zipcode != -1) zipcodeCitiesHashMap.getCityName(zipcode);
                 }
                 case 4 -> {
-                    System.out.println("Ingresa el código postal de la ciudad que deseas eliminar: ");
-                    int zipcode = Integer.parseInt(input.nextLine());
-                    zipcodeCitiesHashMap.removeCity(zipcode);
+                    int zipcode = zipcodeCitiesHashMap.readValidZipCode(input);
+                    if (zipcode != -1) zipcodeCitiesHashMap.removeCity(zipcode);
                 }
                 case 5 -> {
-                    System.out.println("Ingresa el código postal de la ciudad que deseas actualizar: ");
-                    int zipcode = Integer.parseInt(input.nextLine());
-                    String result = zipcodeCitiesHashMap.zipcodesCities.get(zipcode);
-
-                    if(zipcodeCitiesHashMap.zipcodesCities.containsKey(zipcode)) {
-                        System.out.println(result + " es la ciudad actual. Ingresa el nuevo nombre para actualizarlo: ");
-                        String newCityName = zipcodeCitiesHashMap.normalizeName(input.nextLine());
-                        zipcodeCitiesHashMap.zipcodesCities.replace(zipcode, newCityName);
-                        System.out.println(result + " ha sido cambiada a: " + newCityName);
+                    int zipcode = zipcodeCitiesHashMap.readValidZipCode(input);
+                    if (zipcode != -1) {
+                        String newCityName = zipcodeCitiesHashMap.readValidCityName(input);
+                        if (newCityName != null) zipcodeCitiesHashMap.updateCity(zipcode, newCityName);
                     } else {
-                        System.out.println("El código postal " + zipcode + " no existe.");
+                        System.out.println("El código postal no existe en la lista.");
                     }
                 }
                 case 6 -> System.out.println("Saliendo del programa");
                 default -> System.out.println("Ingresa una opción válida.");
             }
-
-        } while (userOption != 6);
+        }
+        while (userOption != 6);
         input.close();
     }
 }
