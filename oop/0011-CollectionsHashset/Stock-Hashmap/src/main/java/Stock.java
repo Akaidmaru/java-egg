@@ -9,57 +9,51 @@ public class Stock {
         inventory = new HashMap<>();
     }
 
-    public void addItem(String name, Integer stock) {
+    public String addItem(String name, Integer stock) {
         if (stock == null || stock < 0) {
-            System.out.println("Stock must be a positive integer.");
-            return;
+            return "Stock must be a positive integer.";
         }
         name = normalizeName(name);
         inventory.put(name, stock);
-        System.out.println(name + " was added. Stock is: " + stock + " item(s).");
+        return name + " was added. Stock is: " + stock + " item(s).";
     }
 
-    public void updateItem(String name, Integer stock) {
+    public String updateItem(String name, Integer stock) {
         if (stock == null || stock < 0) {
-            System.out.println("Stock must be a positive integer.");
-            return;
+            return "Stock must be a positive integer.";
         }
         name = normalizeName(name);
         if (!inventory.containsKey(name)) {
-            System.out.println(name + " is not in inventory. Try adding it first.");
-            return;
+            return name + " is not in inventory. Try adding it first.";
+
         }
         inventory.replace(name, stock);
-        System.out.println(name + " was updated. Stock is: " + stock + " item(s).");
+        return name + " was updated. Stock is: " + stock + " item(s).";
     }
 
 
-    public void updateStock(String name, Integer stock) {
+    public String updateStock(String name, Integer stock) {
         if (stock == null || stock < 0) {
-            System.out.println("Stock must be a positive integer.");
-            return;
+            return "Stock must be a positive integer.";
         }
         name = normalizeName(name);
         if (!inventory.containsKey(name)) {
-            System.out.println(name + " is not in inventory. Try adding it first.");
-            return;
+            return name + " is not in inventory. Try adding it first.";
         }
         inventory.put(name, inventory.get(name) + stock);
-        System.out.println(name + " stock incremented: " + stock + ". Total: " + inventory.get(name));
+        return name + " stock incremented: " + stock + ". Total: " + inventory.get(name);
     }
 
-    public void getItemStock(String name) {
+    public String getItemStock(String name) {
         if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty!");
-            return;
+            return "Inventory is empty!";
         }
         name = normalizeName(name);
         if (!inventory.containsKey(name)) {
-            System.out.println(name + " is not in inventory. Try adding it first.");
-            return;
+            return name + " is not in inventory. Try adding it first.";
         }
         Integer result = inventory.get(name);
-        System.out.println(name + " has " + result + " item(s) in stock.");
+        return name + " has " + result + " item(s) in stock.";
     }
 
     public void getAllItems() {
