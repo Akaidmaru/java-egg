@@ -12,7 +12,7 @@ public class Main {
         System.out.println(stock.getItemStock("Celeste"));
         System.out.println(stock.getItemStock("GBA"));
 
-        stock.getAllItems();
+        System.out.println(stock.getAllItems());
 
         System.out.println(stock.updateItem("SwiTCH", 11));
         System.out.println(stock.updateItem("Nintendo Switch", 25));

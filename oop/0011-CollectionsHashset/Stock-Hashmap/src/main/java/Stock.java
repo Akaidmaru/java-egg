@@ -56,19 +56,18 @@ public class Stock {
         return name + " has " + result + " item(s) in stock.";
     }
 
-    public void getAllItems() {
+    public String getAllItems() {
+        StringBuilder stringBuilder = new StringBuilder();
         if (inventory.isEmpty()) {
-            System.out.println("Inventory is empty!");
-        } else {
-            System.out.println("""
-                    *********Inventory*********
-                    Item Name--------Stock
-                    """);
-            for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getValue());
-            }
+            return "Inventory is empty!";
         }
+        stringBuilder.append("*********Inventory*********\n");
+        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
+            stringBuilder.append(entry.getKey() + " " + entry.getValue() + "\n");
+        }
+        return stringBuilder.toString();
     }
+
 
     public String normalizeName(String name) {
         if (name == null || name.isBlank()) {
