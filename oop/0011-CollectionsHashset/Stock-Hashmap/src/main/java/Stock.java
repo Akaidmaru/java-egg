@@ -74,8 +74,8 @@ public class Stock {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Product name cannot be null or empty.");
         }
-        return name.trim().substring(0, 1).toUpperCase() +
-                name.trim().substring(1).toLowerCase();
+        name = name.trim();
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1).toLowerCase();
 
     }
 
