@@ -1,6 +1,7 @@
 package main.java.com.backend.estancias.repository;
 
 import java.sql.*;
+import java.util.List;
 
 public abstract class DAO {
 
@@ -10,14 +11,14 @@ public abstract class DAO {
     protected PreparedStatement preparedStatement = null;
     private final String HOST = "127.0.0.1";
     private final String PORT = "3306";
-    private final String USER = "xxxx";
-    private final String PASSWORD = "xxxx";
-    private final String DATABASE = "xxxxxxxx";
-    private final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private final String USER = "root";
+    private final String PASSWORD = "R3d$m4ro0.";
+    private final String DATABASE = "estancias_exterior";
     private final String ZONA = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
 
     protected void connectarDataBase() throws SQLException, ClassNotFoundException {
         try {
+            String DRIVER = "com.mysql.cj.jdbc.Driver";
             Class.forName(DRIVER);
             String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + ZONA;
             conexion = DriverManager.getConnection(url, USER, PASSWORD);
@@ -38,7 +39,7 @@ public abstract class DAO {
             }
             if (conexion != null) {
                 conexion.close();
-                System.out.println("Cerrando conexion DDBB");
+                System.out.println("Cerrando conexion a la Base de Datos");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -47,7 +48,7 @@ public abstract class DAO {
 
     protected void insertarModificarEliminarDataBase(String sql) throws Exception {
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + ZONA, USER, PASSWORD);
-            Statement stmt = conn.createStatement()) {
+             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
             System.out.println("Dato OK en BBDD");
         } catch (SQLException ex) {
@@ -57,8 +58,9 @@ public abstract class DAO {
     }
 
     protected void consultarDataBase(String sql) throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + ZONA, USER, PASSWORD);
-            Statement stmt = conn.createStatement()) {
+        try {
+            connectarDataBase();
+            Statement stmt = conexion.createStatement();
             resultSet = stmt.executeQuery(sql);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -67,10 +69,27 @@ public abstract class DAO {
     }
 
     protected void prepareStatementInsertarModificarEliminarDataBase(String sql) throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE + ZONA, USER, PASSWORD);
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try {
+            connectarDataBase();
+            PreparedStatement pstmt = conexion.prepareStatement(sql);
             preparedStatement = pstmt;
             System.out.println("Dato OK en BBDD");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            throw ex;
+        }
+    }
+
+    protected void prepareStatementConsultarDataBase(String sql, List<Object> parametros) throws Exception {
+        PreparedStatement pstmt = null;
+        try {
+            connectarDataBase();
+            pstmt = conexion.prepareStatement(sql);
+
+            for (int i = 0; i < parametros.size(); i++) {
+                pstmt.setObject(i + 1, parametros.get(i));
+            }
+            resultSet = pstmt.executeQuery();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             throw ex;

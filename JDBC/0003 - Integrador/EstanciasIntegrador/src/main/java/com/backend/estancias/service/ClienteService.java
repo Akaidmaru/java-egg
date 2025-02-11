@@ -1,5 +1,6 @@
 package main.java.com.backend.estancias.service;
 
+import main.java.com.backend.estancias.DTO.ClienteEstanciaDTO;
 import main.java.com.backend.estancias.entity.Cliente;
 import main.java.com.backend.estancias.repository.ext.ClienteDAO;
 
@@ -18,6 +19,14 @@ public class ClienteService {
             System.out.println("cliente = " + cliente);
         }
         return clientes;
+    }
+
+    public List<ClienteEstanciaDTO> listarClientesEstanciaPrevia() throws Exception {
+        List<ClienteEstanciaDTO> clientesEstanciaDTO = clienteDAO.listarClientesEstanciaPrevia();
+        for (ClienteEstanciaDTO cliente : clientesEstanciaDTO) {
+            System.out.println(cliente);
+        }
+        return clientesEstanciaDTO;
     }
 
     public Cliente registrarCliente(Cliente cliente) throws Exception {

@@ -1,5 +1,6 @@
 package main.java.com.backend.estancias.repository.ext;
 
+import main.java.com.backend.estancias.DTO.ClienteEstanciaDTO;
 import main.java.com.backend.estancias.entity.Cliente;
 import main.java.com.backend.estancias.repository.DAO;
 
@@ -46,6 +47,31 @@ public class ClienteDAO extends DAO {
         desconectarDataBase();
         return clientes;
     }
+
+
+    public List<ClienteEstanciaDTO> listarClientesEstanciaPrevia() throws Exception {
+        String sql = "SELECT DISTINCT cl.id_cliente, cl.nombre, e.nombre_huesped, e.fecha_desde, e.fecha_hasta, c.tipo_vivienda" +
+                " FROM estancias e INNER JOIN clientes cl on cl.id_cliente = e.id_cliente " +
+                " INNER JOIN casas c on c.id_casa = e.id_casa";
+        consultarDataBase(sql);
+
+        List<ClienteEstanciaDTO> clientesEstancias = new ArrayList<>();
+        while (resultSet.next()) {
+            ClienteEstanciaDTO dto = new ClienteEstanciaDTO();
+            dto.setIdCliente(resultSet.getInt("id_cliente"));
+            dto.setNombreCliente(resultSet.getString("nombre"));
+            dto.setNombreHuesped(resultSet.getString("nombre_huesped"));
+            dto.setFechaDesde(String.valueOf(resultSet.getDate("fecha_desde")));
+            dto.setFechaHasta(String.valueOf(resultSet.getDate("fecha_hasta")));
+            dto.setTipoVivienda(resultSet.getString("tipo_vivienda"));
+
+            clientesEstancias.add(dto);
+        }
+
+        desconectarDataBase();
+        return clientesEstancias;
+    }
+
 
     public Cliente buscarCliente(int idCliente) throws Exception {
         String sql = "SELECT id_cliente, nombre, calle, numero, codigo_postal, ciudad, pais, email FROM clientes WHERE id_cliente=" + idCliente;

@@ -1,8 +1,10 @@
 package main.java.com.backend.estancias.service;
 
+import main.java.com.backend.estancias.DTO.CasaComentarioDTO;
 import main.java.com.backend.estancias.entity.Casa;
 import main.java.com.backend.estancias.repository.ext.CasaDAO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CasaService {
@@ -14,14 +16,29 @@ public class CasaService {
 
     public List<Casa> listarCasas() throws Exception {
         List<Casa> casas = casaDAO.listarCasas();
-        System.out.println("casas = " + casas);
-
+        for (Casa casa : casas) {
+            System.out.println(casa);
+        }
         return casas;
+    }
 
+    public List<Casa> listarCasasDisponiblesAgosto() throws Exception {
+        List<Casa> casas = casaDAO.listarCasasDisponiblesAgosto();
+        for (Casa casa : casas) {
+            System.out.println(casa);
+        }
+        return casas;
+    }
+
+    public List<Casa> listarCasasDisponiblesFechaEIntervaloDias(LocalDate fecha, int diasEstadia) throws Exception {
+        List<Casa> casas = casaDAO.listarCasasDisponiblesFechaEIntervaloDias(fecha, diasEstadia);
+        for (Casa casa : casas) {
+            System.out.println(casa);
+        }
+        return casas;
     }
 
     public Casa registrarCasa(Casa casa) throws Exception {
-
         Casa casaBuscada = casaDAO.buscarCasaByAddress(casa);
         System.out.println("casaBuscada = " + casaBuscada);
         if (casaBuscada.getIdCasa() != 0) {
@@ -63,4 +80,29 @@ public class CasaService {
 
     }
 
+    public List<Casa> listarCasasPorPais(String pais) throws Exception {
+        List<Casa> casas = casaDAO.listarCasasPorPais(pais);
+        for (Casa casa : casas) {
+            System.out.println(casa);
+        }
+        return casas;
+    }
+
+    public void incrementarPrecioPorDia(double porcentaje, String pais) throws Exception {
+        casaDAO.incrementarPrecioPorDia(porcentaje, pais);
+        System.out.println("Precio por día incrementado, se procede a mostrar los precios actualizados.");
+        listarCasasPorPais(pais);
+    }
+
+    public void obtenerNumeroCasasPorPais() throws Exception {
+        casaDAO.obtenerNumeroCasasPorPais();
+    }
+
+    public List<CasaComentarioDTO> listarCasasReinoUnidoLimpias() throws Exception {
+        List<CasaComentarioDTO> casas = casaDAO.listarCasasReinoUnidoLimpias();
+        for (CasaComentarioDTO casa : casas) {
+            System.out.println(casa);
+        }
+        return casas;
+    }
 }

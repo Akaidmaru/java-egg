@@ -14,15 +14,28 @@ public class FamiliaService {
         this.familiaDAO = new FamiliaDAO();;
     }
 
-    public List<Familia> listarFamilias () throws Exception {
+    public List<Familia> listarFamilias() throws Exception {
         List<Familia> familiaList = familiaDAO.listarFamilias();
         for (Familia familia : familiaList) {
             System.out.println("familia = " + familia);
         }
-
-
         return familiaList;
+    }
 
+    public List<Familia> listarFamiliasNumHijosAndEdadMaxima() throws Exception {
+        List<Familia> familiaList = familiaDAO.listarFamiliasNumHijosAndEdadMaxima();
+        for (Familia familia : familiaList) {
+            System.out.println(familia);
+        }
+        return familiaList;
+    }
+
+    public List<Familia> listarFamiliasEmailHotmail() throws Exception {
+        List<Familia> familiaList = familiaDAO.listarFamiliasEmailHotmail();
+        for (Familia familia : familiaList) {
+            System.out.println(familia);
+        }
+        return familiaList;
     }
 
     public Familia registrarFamilia(Familia familia) throws Exception {
@@ -48,21 +61,17 @@ public class FamiliaService {
         if(buscarFamilia(idFamilia).getIdFamilia()==0){
             throw new RuntimeException("No se pudo actualizar la Familia pq existe en el sistema");
         }
-
         Familia familiaActualizada = familiaDAO.actualizarFamilia(familia,idFamilia);
         System.out.println("familiaActualizada = " + familiaActualizada);
         return familiaActualizada;
-
     }
 
     public void eliminarFamilia(int idFamilia) throws Exception {
         if (buscarFamilia(idFamilia).getIdFamilia()==0) {
             throw new RuntimeException("No se pudo elimiar la Familia pq no existe en el sistema");
         }
-
         familiaDAO.eliminarFamilia(idFamilia);
         System.out.println("Familia eliminada con id = " + idFamilia);
-
     }
 
 }
