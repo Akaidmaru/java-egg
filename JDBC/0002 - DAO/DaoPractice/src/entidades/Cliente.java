@@ -4,7 +4,7 @@ public class Cliente {
     private int idCliente;
     private int codigoCliente;
     private String nombreCliente;
-    private String apellidoCliente;
+    private String apellidoContacto;
     private String telefono;
     private String fax;
     private String ciudad;
@@ -17,11 +17,13 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int idCliente, int codigoCliente, String nombreCliente, String apellidoCliente, String telefono, String fax, String ciudad, String region, String pais, String codigoPostal, int idEmpleado, Double limiteCredito) {
+
+
+    public Cliente(int idCliente, int codigoCliente, String nombreCliente, String apellidoContacto, String telefono, String fax, String ciudad, String region, String pais, String codigoPostal, int idEmpleado, Double limiteCredito) {
         this.idCliente = idCliente;
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
-        this.apellidoCliente = apellidoCliente;
+        this.apellidoContacto = apellidoContacto;
         this.telefono = telefono;
         this.fax = fax;
         this.ciudad = ciudad;
@@ -32,10 +34,10 @@ public class Cliente {
         this.limiteCredito = limiteCredito;
     }
 
-    public Cliente(int codigoCliente, String nombreCliente, String apellidoCliente, String telefono, String fax, String ciudad, String region, String pais, String codigoPostal, int idEmpleado, Double limiteCredito) {
+    public Cliente(int codigoCliente, String nombreCliente, String apellidoContacto, String telefono, String fax, String ciudad, String region, String pais, String codigoPostal, int idEmpleado, Double limiteCredito) {
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
-        this.apellidoCliente = apellidoCliente;
+        this.apellidoContacto = apellidoContacto;
         this.telefono = telefono;
         this.fax = fax;
         this.ciudad = ciudad;
@@ -44,6 +46,12 @@ public class Cliente {
         this.codigoPostal = codigoPostal;
         this.idEmpleado = idEmpleado;
         this.limiteCredito = limiteCredito;
+    }
+
+    public Cliente(String nombreCliente, String apellidoContacto, String telefono) {
+        this.nombreCliente = nombreCliente;
+        this.apellidoContacto = apellidoContacto;
+        this.telefono = telefono;
     }
 
     public int getIdCliente() {
@@ -70,12 +78,12 @@ public class Cliente {
         this.nombreCliente = nombreCliente;
     }
 
-    public String getApellidoCliente() {
-        return apellidoCliente;
+    public String getApellidoContacto() {
+        return apellidoContacto;
     }
 
-    public void setApellidoCliente(String apellidoCliente) {
-        this.apellidoCliente = apellidoCliente;
+    public void setApellidoContacto(String apellidoContacto) {
+        this.apellidoContacto = apellidoContacto;
     }
 
     public String getTelefono() {
@@ -140,5 +148,15 @@ public class Cliente {
 
     public void setLimiteCredito(Double limiteCredito) {
         this.limiteCredito = limiteCredito;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "idCliente=" + idCliente +
+                ", nombreCliente='" + nombreCliente + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", apellidoContacto='" + apellidoContacto + '\'' +
+                '}';
     }
 }

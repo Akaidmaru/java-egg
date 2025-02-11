@@ -1,10 +1,6 @@
 package persistencia;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public abstract class DAO {
     protected Connection conexion = null;
@@ -53,7 +49,8 @@ public abstract class DAO {
             statement = conexion.createStatement();
             statement.executeUpdate(sqlQuery);
         } catch (SQLException e) {
-            desconectarDataBase(); // Desconecta
+            System.out.println(e.getMessage());
+            throw e;
         } finally {
             desconectarDataBase(); // Desconecta
         }
@@ -66,10 +63,8 @@ public abstract class DAO {
             resultSet = statement.executeQuery(sqlQuery);
             return resultSet;
         } catch (SQLException e) {
-            desconectarDataBase(); // Desconecta
-            return resultSet;
-        } finally {
-            desconectarDataBase(); // Desconectar
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
