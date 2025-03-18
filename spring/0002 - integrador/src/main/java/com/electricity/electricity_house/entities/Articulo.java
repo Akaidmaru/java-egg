@@ -30,7 +30,7 @@ public class Articulo {
     @ManyToOne
     private Fabrica fabrica;
 
-    public static void resetCounter(int value){
+    public static void resetCounter(int value) {
         atomicInteger = new AtomicInteger(value);
     }
 
