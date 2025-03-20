@@ -18,7 +18,7 @@ public class Articulo {
     @Column(unique = true)
     private Integer nroArticulo;
 
-    @Getter // Lombok no genera getters ni setter para campos estáticos, hay que especificalros
+    @Getter // Lombok no genera getters ni setter para campos estáticos, hay que especificarlos
     private static AtomicInteger atomicInteger = new AtomicInteger(0);
 
     @Column(nullable = false)

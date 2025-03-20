@@ -10,7 +10,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -87,10 +86,9 @@ public class ArticuloService {
 
     }
 
-
     private void validate(String nombre, String descripcion, UUID idFabrica) throws Exception {
         if (nombre == null || nombre.trim().isEmpty()) {
-            throw new Exception("El nombre de la editorial no puede ser nulo o estar vacío.");
+            throw new Exception("El nombre del artículo no puede ser nulo o estar vacío.");
         }
         if (descripcion == null || descripcion.trim().isEmpty()) {
             throw new Exception("La descripción no puede ser nula o estar vacía");
