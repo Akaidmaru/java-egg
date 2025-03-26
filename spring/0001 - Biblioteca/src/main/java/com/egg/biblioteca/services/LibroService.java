@@ -40,6 +40,8 @@ public class LibroService {
         libro.setFechaAlta(new Date());
         libro.setAutor(autor);
         libro.setEditorial(editorial);
+
+        libroRepository.save(libro);
     }
 
     @Transactional(readOnly = true)

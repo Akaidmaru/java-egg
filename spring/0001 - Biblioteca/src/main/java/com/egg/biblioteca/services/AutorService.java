@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AutorService {
@@ -28,4 +29,13 @@ public class AutorService {
         return autorRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Autor getOne(UUID idAutor){
+        return autorRepository.getReferenceById(idAutor);
+    }
+
+    @Transactional
+    public void modificarAutor(String nombre, UUID id){
+        
+    }
 }
