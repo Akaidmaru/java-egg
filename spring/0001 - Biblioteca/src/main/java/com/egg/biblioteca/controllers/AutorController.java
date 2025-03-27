@@ -51,15 +51,20 @@ public class AutorController {
 
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable UUID id, ModelMap modelo){
+
         modelo.put("autor", autorService.getOne(id));
 
         return "autor_modificar.html";
     }
 
-    @PostMapping("{id}")
-    public String modificar(@PathVariable UUID id, ModelMap modelo){
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable UUID id, String nombre, ModelMap modelo){
         try{
-            autorService.modifi
+            autorService.modificarAutor(nombre, id);
+            return "redirect:../lista";
+        } catch (Exception e) {
+            modelo.put("error", e.getMessage());
+            return "autor_modificar.html";
         }
     }
 
